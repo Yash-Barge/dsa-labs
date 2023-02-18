@@ -5,11 +5,13 @@
 
 #include "linked_list.h"
 
-struct linked_list *new_stack(void);
-void push(struct linked_list *s, int e);
-int top(struct linked_list *s);
-void pop(struct linked_list *s);
-bool is_empty(struct linked_list *s);
-void free_stack(struct linked_list *s);
+struct stack;
+
+struct stack *new_stack(void);
+void push(struct stack *s, int e);
+int top(struct stack *s);
+void pop(struct stack *s);
+bool is_empty(struct stack *s);
+void free_stack(struct stack *s);
 
 #endif

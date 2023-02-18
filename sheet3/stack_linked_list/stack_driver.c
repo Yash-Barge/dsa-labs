@@ -3,7 +3,7 @@
 #include "stack.h"
 
 int main(void) {
-    struct linked_list *s = new_stack();
+    struct stack *s = new_stack();
 
     if(is_empty(s)) printf("Stack is empty\n");
     
