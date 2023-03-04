@@ -74,21 +74,21 @@ void visualize_round_robin(char *path) {
     printf("Number of processes: %d\n", num_processes);
     printf("%-10s%-15s%-15s%-15s%-15s\n", "Process", "Arrival Time", "Burst Time", "Waiting Time", "Turnaround Time");
 
-    linked_deque *ld = create_linked_process_deque();
+    array_deque *ld = create_empty_process_array_deque();
 
     // COMPLETE using the ld for storing processes as described
     int time_total = 0;
     int time_in_queue = 0;
     int index = 0;
 
-    while (!time_total || !is_empty_linked_deque(ld)) {
+    while (!time_total || get_size_array_deque(ld)) {
         if ((index < 5) && (time_total == (*(processes + index))->arrival)) {
-            add_last_linked_deque(ld, **(processes + index));
+            add_last_array_deque(ld, **(processes + index));
             index++;
         }
 
         process *temp = malloc(sizeof(process));
-        remove_first_linked_deque(ld, temp);
+        remove_first_array_deque(ld, temp);
 
         (temp->remaining_time)--;
         time_in_queue++;
@@ -101,14 +101,14 @@ void visualize_round_robin(char *path) {
         }
         else if (time_in_queue == TIME_QUANTUM) {
             if ((index < 5) && (time_total == (*(processes + index))->arrival - 1)) {
-                add_last_linked_deque(ld, **(processes + index));
+                add_last_array_deque(ld, **(processes + index));
                 index++;
             }
 
-            add_last_linked_deque(ld, *temp);
+            add_last_array_deque(ld, *temp);
             time_in_queue = 0;
         } else {
-            add_first_linked_deque(ld, *temp);
+            add_first_array_deque(ld, *temp);
         }
 
         free(temp);
